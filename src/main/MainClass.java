@@ -3,7 +3,10 @@ package main;
 public class MainClass {
 	
 	public static void main(String[] args) {
-		Game game = new Game();
+		
+		GamePanel gp = new GamePanel();
+		GameWindow gw = new GameWindow(gp);
+		gp.startGameThread();
 
 	}
 
