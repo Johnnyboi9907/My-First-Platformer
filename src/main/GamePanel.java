@@ -50,35 +50,22 @@ public class GamePanel extends JPanel implements Runnable{
 	public void run() { // this method will run after startGameThread() method
 		
 		double drawInterval = 1000000000/FPS; // how long 1 single frame will last on screen (1 billion nanoseconds / 60)
-		double nextDrawTime = System.nanoTime() + drawInterval; // current time + drawInterval = next time to draw the screen
+		double delta = 0;
+		long lastTime = System.nanoTime();
+		long currentTime;
 		
 		while (gameThread != null) { // game loop
 			
-			//long currentTime = System.nanoTime(); // gets the current time in nanoseconds
+			currentTime = System.nanoTime();
+			delta += (currentTime - lastTime) / drawInterval;
+			lastTime = currentTime;
 			
-			// 1. UPDATE INFORMATION
-			update();
-			
-			// 2. DRAW SCREEN WITH NEW INFORMATION
-			repaint(); // recalls paintComponent() method
-			
-			try {
-				
-				double remainingTime = nextDrawTime - System.nanoTime();
-				remainingTime = remainingTime / 1000000; // convert from nanoseconds to milliseconds
-				
-				if (remainingTime < 0) {
-					remainingTime = 0;
-				}
-				
-				Thread.sleep((long) remainingTime); // pause the game loop for the duration of remainingTime
-				
-				nextDrawTime += drawInterval;
-				
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if (delta >= 1) {
+				update();
+				repaint();
+				delta--;
 			}
+			
 		}
 	}
 	
