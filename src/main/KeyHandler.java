@@ -17,19 +17,19 @@ public class KeyHandler implements KeyListener {
 
 		int code = e.getKeyCode(); // returns the integer number of the inputed key
 
-		if (code == KeyEvent.VK_W) { // if the user pressed 'W' key
+		if (code == KeyEvent.VK_UP) { // if the user pressed 'W' key
 			upPressed = true;
 		}
 
-		if (code == KeyEvent.VK_S) { // if the user pressed 'S' key
+		if (code == KeyEvent.VK_DOWN) { // if the user pressed 'S' key
 			downPressed = true;
 		}
 
-		if (code == KeyEvent.VK_A) { // if the user pressed 'A' key
+		if (code == KeyEvent.VK_LEFT) { // if the user pressed 'A' key
 			leftPressed = true;
 		}
 
-		if (code == KeyEvent.VK_D) { // if the user pressed 'D' key
+		if (code == KeyEvent.VK_RIGHT) { // if the user pressed 'D' key
 			rightPressed = true;
 		}
 	}
@@ -39,19 +39,19 @@ public class KeyHandler implements KeyListener {
 		
 		int code = e.getKeyCode();
 		
-		if (code == KeyEvent.VK_W) {
+		if (code == KeyEvent.VK_UP) {
 			upPressed = false;
 		}
 
-		if (code == KeyEvent.VK_S) {
+		if (code == KeyEvent.VK_DOWN) {
 			downPressed = false;
 		}
 
-		if (code == KeyEvent.VK_A) {
+		if (code == KeyEvent.VK_LEFT) {
 			leftPressed = false;
 		}
 
-		if (code == KeyEvent.VK_D) {
+		if (code == KeyEvent.VK_RIGHT) {
 			rightPressed = false;
 		}
 	}

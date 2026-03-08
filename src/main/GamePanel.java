@@ -7,13 +7,15 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.Player;
+
 public class GamePanel extends JPanel implements Runnable{
 
 	// SCREEN SETTINGS
 	final int ORIGINAL_TILE_SIZE = 16; // 16x16 tile
 	final int SCALE = 3;
 	
-	final int tileSize = ORIGINAL_TILE_SIZE * SCALE; // 48x48 tile
+	public final int tileSize = ORIGINAL_TILE_SIZE * SCALE; // 48x48 tile
 	
 	final int MAX_COLUMNS = 16;
 	final int MAX_ROWS = 12;
@@ -26,10 +28,7 @@ public class GamePanel extends JPanel implements Runnable{
 	Thread gameThread; // game clock which keeps the program running until manually stopped
 	KeyHandler keyHandler = new KeyHandler();
 	
-	// set the player's default values
-	int posX = 100;
-	int posY = 100;
-	int playerSpeed = 4;
+	Player player = new Player(this, keyHandler);
 	
 	public GamePanel() {
 		
@@ -71,18 +70,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	public void update() { // update player's position
 		
-		if (keyHandler.upPressed == true) {
-			posY -= playerSpeed;
-		}
-		else if (keyHandler.downPressed == true) {
-			posY += playerSpeed;
-		}
-		else if (keyHandler.leftPressed == true) {
-			posX -= playerSpeed;
-		}
-		else if (keyHandler.rightPressed == true) {
-			posX += playerSpeed;
-		}
+		player.update();
 	}
 	
 	public void paintComponent(Graphics g) { // built-in java method to draw objects on the screen
@@ -91,8 +79,8 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		Graphics2D g2 = (Graphics2D)g; // Graphics g is being converted to Graphics2D g2 (downcasting)
 		
-		g2.setColor(Color.magenta);
-		g2.fillRect(posX, posY, tileSize, tileSize);
+		player.draw(g2);
+		
 		g2.dispose(); // saves memory
 	}
 }
